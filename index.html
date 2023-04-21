@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>aaaa</title>
+	<script src="processing.js"></script>
+</head>
+
+<body>
+	<h1>Processing.js</h1>
+	<script type="text/processing">
+		/*import controlP5.*;
+		import java.util.*;
+
+		ControlP5 cp5;
+		int myCurrentIndex = 0;
+		String[] tokens;*/
+
+		
+
+		int scene = 0;
+		PImage[] img = new PImage[5];
+		int pressed_num = 0;
+		int yes_no = 100;
+		int gender = 100;
+
+		String savefile = "data.txt";
+
+		void setup(){
+			size(960, 540);
+			background(255);
+			PFont font = createFont("utf-8", 50);
+			textFont(font);
+
+			for(int i = 0; i < 5; i++){
+				img[i] = loadImage("area_no3_" + (i + 1) * 10 + ".jpg");
+			}
+			// img = loadImage("area_no3_30.jpg");
+
+
+			String words = "Howdy!,Save to text file by saveStrings";
+			String[] list = split(words, ',');
+
+			saveStrings(savefile, list);
+			//exit();
+
+
+/*
+			cp5 = new ControlP5(this);
+
+			tokens = new String[10];
+			tokens[0] = "Hello";
+			tokens[1] = "Hi";
+			tokens[2] = "Ca va bien?";
+
+			List l = Arrays.asList(tokens[0], tokens[1], tokens[2]);
+
+			cp5.addScrollableList("dropdown")
+				.setPosition(100, 100)
+				.setSize(200, 100)
+				.setBarHeight(20)
+				.setItemHeight(20)
+				.addItems(l)
+				// .setType(ScrollableList.LIST) // currently supported DROPDOWN and LIST
+				;*/
+		}
+
+		void draw(){
+			switch(scene) {
+				case 0:
+					fill(0);
+					textSize(40);
+					textAlign(CENTER);
+					text("Enterを押して始める", width/2, height/2 );
+					break;
+				
+				case 1:
+					background(255);
+					fill(0);					
+					textAlign(LEFT);		
+					textSize(40);			
+					text("実験概要", 10, 50);
+					textSize(25);
+					text("この実験では、~~。", 20, 80);
+					text("この実験の所要時間は約~分です。", 20, 110);
+					text("PC(またはスマートフォン)から回答することを推奨しています。", 20, 140);
+					text("※個人情報の取扱いについて※", 20, 170);
+					text("今回の調査で得た内容は、調査目的以外に使用いたしません。", 30, 200);
+					text("個人が特定できるような集計は行わず、本プロジェクトの目的以外に\n利用しないことを約束いたします。", 30, 230);
+
+/*
+					if (myCurrentIndex >= 0) {
+						text(tokens[myCurrentIndex], 200, 40); 
+					}*/
+
+					/*
+					fill(255);
+					
+					if(width / 2 - 100 <= mouseX && mouseX <= width / 2 - 100 + 80 && height * 0.88 <= mouseY && mouseY <= height * 0.88 + 50){
+						//fill(160);
+						if(mousePressed == true){
+							gender = 1;
+						}
+					}
+
+					if(gender == 1) fill(160);
+					rect(width / 2 - 100, height * 0.88, 80, 50);
+
+
+					fill(255);
+					if(width / 2 + 20 <= mouseX && mouseX <= width / 2 + 20 + 80 && height * 0.88 <= mouseY && mouseY <= height * 0.88 + 50){
+						// fill(160);
+						if(mousePressed == true){
+							gender = 0;
+						}
+					}
+
+					if(gender == 0) fill(160);
+					rect(width / 2 + 20, height * 0.88, 80, 50);
+					fill(0);
+					text("YES", width / 2 - 60, height * 0.95);
+					text("NO", width / 2 + 60, height * 0.95);
+					*/
+
+					break;
+
+				case 2:
+					background(255);
+					fill(0);
+					textSize(40);
+					// textAlign(CENTER);
+					text("実験手順", 90, 50);
+					break;
+
+				case 3:
+					background(255);
+					fill(0);
+					textSize(40);
+					// textAlign(CENTER);
+					text("実験手順", 90, 50);
+					break;
+
+				case 4:
+					background(255);
+					//fill(0);
+					textSize(30);
+					textAlign(CENTER);
+					text("この画像で左の建物は注目されていますか？", width/2, height * 0.85);
+					//text("scene0", width/2, (height/2)-100);
+
+					image(img[pressed_num], 160, 0);
+
+					fill(255);
+					
+					if(width / 2 - 100 <= mouseX && mouseX <= width / 2 - 100 + 80 && height * 0.88 <= mouseY && mouseY <= height * 0.88 + 50){
+						//fill(160);
+						if(mousePressed == true){
+							yes_no = 1;
+						}
+					}
+
+					if(yes_no == 1) fill(160);
+					rect(width / 2 - 100, height * 0.88, 80, 50);
+
+
+					fill(255);
+					if(width / 2 + 20 <= mouseX && mouseX <= width / 2 + 20 + 80 && height * 0.88 <= mouseY && mouseY <= height * 0.88 + 50){
+						// fill(160);
+						if(mousePressed == true){
+							yes_no = 0;
+						}
+					}
+
+					if(yes_no == 0) fill(160);
+					rect(width / 2 + 20, height * 0.88, 80, 50);
+					fill(0);
+					text("YES", width / 2 - 60, height * 0.95);
+					text("NO", width / 2 + 60, height * 0.95);
+					
+
+					for(int i = 0; i < 5; i++){
+						fill(255);
+						if(100 + width / 6 * i <= mouseX && mouseX <= 100 + width / 6 * i + 120 && height * 0.62 <= mouseY && mouseY <= height * 0.62 + 80){
+							fill(160);
+							if(mousePressed == true){
+								pressed_num = i;
+							}
+						}
+
+						if(pressed_num == i){
+							fill(160);
+						}
+
+						rect(100 + width / 6 * i, height * 0.62, 120, 80);
+						fill(0);
+						textSize(25);
+						text(i * 10 + 10 + "×" + (i * 10 + 10) * 2, 160 + width / 6 * i, height * 0.72);
+					}
+
+					break;
+				
+				case 5:
+					background(255);
+					fill(0);
+					textSize(40);
+					textAlign(CENTER);
+					text("これで実験は終了です。\nおつかれさまでした。", width/2, height/2 );
+
+					saveStrings(savefile, toString(pressed_num));
+					saveStrings(savefile, toString(yes_no));
+					exit();
+					break;
+			}
+		}
+
+		void mousePressed(){
+			fill(160);
+		}
+
+		/*void dropdown(int n) {
+			println(n);  
+			myCurrentIndex = n;  
+		}*/
+
+		void keyReleased() {
+			if(scene == 4){
+				if (keyCode == ENTER) {
+					scene = 5;
+				}
+			}
+			if(scene == 3){
+				if (keyCode == ENTER) {
+					scene = 4;
+				}
+			}
+			if(scene == 2){
+				if (keyCode == ENTER) {
+					scene = 3;
+				}
+			}
+			if(scene == 1){
+				if (keyCode == ENTER) {
+					scene = 2;
+				}
+			}
+			if(scene == 0){
+				if (keyCode == ENTER) {
+					scene = 1;
+				}
+			}
+		}
+
+    </script>
+	<canvas></canvas>
+</body>
+
+</html>
